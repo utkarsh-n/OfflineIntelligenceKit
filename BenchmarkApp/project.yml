@@ -1,0 +1,63 @@
+name: OfflineIntelligenceBench
+options:
+  bundleIdPrefix: com.utkarsh
+  deploymentTarget:
+    iOS: "27.0"
+  xcodeVersion: "27.0"
+packages:
+  OfflineIntelligenceKit:
+    path: ..
+  OfflineIntelligenceMLX:
+    path: ../MLX
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_APPROACHABLE_CONCURRENCY: YES
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  OfflineIntelligenceBench:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Resources/AppAssets.xcassets
+      - path: Resources/Models
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: OfflineIntelligenceKit
+        product: OfflineIntelligence
+      - package: OfflineIntelligenceKit
+        product: OfflineIntelligenceBenchmarks
+      - package: OfflineIntelligenceMLX
+        product: OfflineIntelligenceMLX
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: Offline Intelligence
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIUserInterfaceStyle: Dark
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.utkarsh.offlineintelligencebench
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+        SWIFT_OPTIMIZATION_LEVEL: "-O"
+        CODE_SIGN_ENTITLEMENTS: App.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    entitlements:
+      path: App.entitlements
+      properties:
+        com.apple.developer.kernel.increased-memory-limit: true
